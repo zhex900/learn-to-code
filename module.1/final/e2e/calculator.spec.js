@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/calculator?engine=engine");
+  await page.goto("/final/calculator?engine=engine");
 });
 
 test("basic addition", async ({ page }) => {

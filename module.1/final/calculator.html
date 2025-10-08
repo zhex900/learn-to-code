@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./calculator.css" />
+    <script type="module">
+      const params = new URLSearchParams(window.location.search);
+      const engine = params.get("engine") || "default";
+
+      window.addEventListener("DOMContentLoaded", async () => {
+        // Setup selector UI
+        const select = document.getElementById("engine-select");
+        if (select) {
+          select.value = engine;
+          select.addEventListener("change", () => {
+            const next = select.value;
+            const nextParams = new URLSearchParams(window.location.search);
+            nextParams.set("engine", next);
+            window.location.search = nextParams.toString();
+          });
+        }
+
+        // Load shared initializer and chosen engine, then initialize
+        const init = await import("./init-calculator.js");
+        const mod =
+          engine === "engine"
+            ? await import("./calculator-engine.js")
+            : await import("./calculator.js");
+        if (
+          init &&
+          typeof init.initCalculator === "function" &&
+          mod &&
+          mod.Calculator
+        ) {
+          init.initCalculator(mod.Calculator, document);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div
+      style="margin-bottom: 8px; display: flex; gap: 8px; align-items: center"
+    >
+      <label for="engine-select">Calculator engine:</label>
+      <select id="engine-select">
+        <option value="default">Default</option>
+        <option value="engine">calculator-engine.js</option>
+      </select>
+    </div>
+    <div class="calculator">
+      <input id="display" class="display" type="text" value="0" readonly />
+      <div class="keys">
+        <button class="key" data-action="clear">AC</button>
+        <button class="key" data-action="delete">DEL</button>
+        <button class="key op" data-value="%">%</button>
+        <button class="key op" data-value="/">÷</button>
+
+        <button class="key" data-value="7">7</button>
+        <button class="key" data-value="8">8</button>
+        <button class="key" data-value="9">9</button>
+        <button class="key op" data-value="*">×</button>
+
+        <button class="key" data-value="4">4</button>
+        <button class="key" data-value="5">5</button>
+        <button class="key" data-value="6">6</button>
+        <button class="key op" data-value="-">−</button>
+
+        <button class="key" data-value="1">1</button>
+        <button class="key" data-value="2">2</button>
+        <button class="key" data-value="3">3</button>
+        <button class="key op" data-value="+">+</button>
+
+        <button class="key wide" data-value="0">0</button>
+        <button class="key" data-value=".">.</button>
+        <button class="key equal" data-action="equals">=</button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
-    <link rel="stylesheet" href="calculator.css" />
+    <link rel="stylesheet" href="./calculator.css" />
     <script type="module">
       const params = new URLSearchParams(window.location.search);
       const engine = params.get("engine") || "default";
@@ -23,11 +23,11 @@
         }
 
         // Load shared initializer and chosen engine, then initialize
-        const init = await import("/src/init-calculator.js");
+        const init = await import("./init-calculator.js");
         const mod =
           engine === "engine"
-            ? await import("/src/calculator-engine.js")
-            : await import("/src/calculator.js");
+            ? await import("./calculator-engine.js")
+            : await import("./calculator.js");
         if (
           init &&
           typeof init.initCalculator === "function" &&
