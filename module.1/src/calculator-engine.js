@@ -4,6 +4,7 @@ export class Calculator {
     this.previous = null;
     this.operator = null;
     this.justEvaluated = false;
+    this.awaitingNextDigit = false;
   }
 
   getDisplay() {
@@ -11,10 +12,10 @@ export class Calculator {
   }
 
   inputDigit(d) {
-    console.log("inputDigit", d, this.operator, this.current);
-    if (this.justEvaluated) {
+    if (this.justEvaluated || this.awaitingNextDigit) {
       this.current = d;
       this.justEvaluated = false;
+      this.awaitingNextDigit = false;
       return;
     }
     if (this.current === "0") this.current = d;
@@ -37,6 +38,7 @@ export class Calculator {
     this.previous = null;
     this.operator = null;
     this.justEvaluated = false;
+    this.awaitingNextDigit = false;
   }
 
   deleteOne() {
@@ -56,7 +58,7 @@ export class Calculator {
     this.previous = parseFloat(this.current);
     this.operator = op;
     this.justEvaluated = false;
-    this.current = "0";
+    this.awaitingNextDigit = true; // start fresh on next digit or dot
   }
 
   evaluate() {
@@ -89,3 +91,5 @@ export class Calculator {
     this.justEvaluated = true;
   }
 }
+
+// UI initialization moved to shared init in src/init-calculator.js
