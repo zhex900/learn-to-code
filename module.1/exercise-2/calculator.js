@@ -4,7 +4,6 @@ export class Calculator {
     this.previous = null;
     this.operator = null;
     this.justEvaluated = false;
-    this.awaitingNextDigit = false;
   }
 
   getDisplay() {
@@ -12,10 +11,10 @@ export class Calculator {
   }
 
   inputDigit(d) {
-    if (this.justEvaluated || this.awaitingNextDigit) {
+    console.log("inputDigit", d, this.operator, this.current);
+    if (this.justEvaluated) {
       this.current = d;
       this.justEvaluated = false;
-      this.awaitingNextDigit = false;
       return;
     }
     if (this.current === "0") this.current = d;
@@ -38,10 +37,14 @@ export class Calculator {
     this.previous = null;
     this.operator = null;
     this.justEvaluated = false;
-    this.awaitingNextDigit = false;
   }
 
+  // implement deleteOne
   deleteOne() {
+    if (this.justEvaluated) {
+      this.clearAll();
+      return;
+    }
     if (this.current.length <= 1) this.current = "0";
     else this.current = this.current.slice(0, -1);
   }
@@ -54,7 +57,7 @@ export class Calculator {
     this.previous = parseFloat(this.current);
     this.operator = op;
     this.justEvaluated = false;
-    this.awaitingNextDigit = true; // start fresh on next digit or dot
+    this.current = "0";
   }
 
   evaluate() {
@@ -66,14 +69,14 @@ export class Calculator {
       case "+":
         result = a + b;
         break;
+      case "/":
+        result = b === 0 ? "Error" : a / b;
+        break;
       case "-":
         result = a - b;
         break;
       case "*":
         result = a * b;
-        break;
-      case "/":
-        result = b === 0 ? "Error" : a / b;
         break;
       case "%":
         result = a % b;
@@ -87,5 +90,3 @@ export class Calculator {
     this.justEvaluated = true;
   }
 }
-
-// UI initialization moved to shared init in src/init-calculator.js

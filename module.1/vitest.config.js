@@ -2,7 +2,7 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    include: ["src/**/*.test.js"],
+    include: ["**/*.test.js"],
     exclude: [
       "tests/**", // exclude Playwright specs
       "node_modules/**",
