@@ -6,9 +6,9 @@ const car = {
   year: 2020,
 };
 
-const sum = 1 +1; // loading  image
+const sum = 1 + 1; // loading  image
 const product = 2 * 3; // loading link
 
-// compile 
+// compile
 console.log(JSON.stringify(car));
-// event loop 
+// event loop
