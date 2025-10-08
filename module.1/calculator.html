@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .calculator {
+        max-width: 360px;
+        margin: 40px auto;
+        padding: 16px;
+        border-radius: 12px;
+        background: #1f2937;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        color: #fff;
+      }
+      .display {
+        width: 100%;
+        height: 64px;
+        margin-bottom: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #111827;
+        color: #e5e7eb;
+        font-size: 28px;
+        text-align: right;
+        padding: 12px;
+      }
+      .keys {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+      .key {
+        border: none;
+        border-radius: 8px;
+        padding: 16px 12px;
+        font-size: 18px;
+        background: #374151;
+        color: #fff;
+        cursor: pointer;
+      }
+      .key.op { background: #2563eb; }
+      .key.equal { background: #16a34a; grid-column: span 2; }
+      .key.wide { grid-column: span 2; }
+      .key:active { transform: translateY(1px); }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <input id="display" class="display" type="text" value="0" readonly />
+      <div class="keys">
+        <button class="key" data-action="clear">AC</button>
+        <button class="key" data-action="delete">DEL</button>
+        <button class="key op" data-value="%">%</button>
+        <button class="key op" data-value="/">÷</button>
+
+        <button class="key" data-value="7">7</button>
+        <button class="key" data-value="8">8</button>
+        <button class="key" data-value="9">9</button>
+        <button class="key op" data-value="*">×</button>
+
+        <button class="key" data-value="4">4</button>
+        <button class="key" data-value="5">5</button>
+        <button class="key" data-value="6">6</button>
+        <button class="key op" data-value="-">−</button>
+
+        <button class="key" data-value="1">1</button>
+        <button class="key" data-value="2">2</button>
+        <button class="key" data-value="3">3</button>
+        <button class="key op" data-value="+">+</button>
+
+        <button class="key wide" data-value="0">0</button>
+        <button class="key" data-value=".">.</button>
+        <button class="key equal" data-action="equals">=</button>
+      </div>
+    </div>
+
+    <script src="/src/calculator.js"></script>
+  </body>
+  </html>
+
+
