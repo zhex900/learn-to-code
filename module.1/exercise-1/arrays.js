@@ -12,6 +12,8 @@ function exercise1() {
   };
 }
 
+console.log(exercise1())
+
 // 2. Add / Remove Elements
 function exercise2(fruits = ["apple", "banana", "cherry"]) {
   const newFruits = [...fruits]; // clone to avoid mutation
@@ -74,5 +76,9 @@ export const addToEnd = (arr, element) => {
 
 // 1. give two arrays return the union of the two arrays
 export const union = (arr1, arr2) => {
+  
+
+
+  
   //   return [...new Set([...arr1, ...arr2])];
 };
