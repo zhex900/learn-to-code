@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dice Generator 🎲</title>
+    <style>
+      body {
+        background: #2c3e50;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background: #34495e;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        width: 300px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+      }
+
+      button {
+        background: #f1c40f;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background: #f39c12;
+      }
+
+      #result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎲 Dice Generator</h1>
+
+      <label for="dice">Choose your dice:</label>
+      <select id="dice">
+        <option value="4">D4</option>
+        <option value="6" selected>D6</option>
+      </select>
+
+      <button id="rollBtn">Roll Dice</button>
+
+      <div id="result"></div>
+    </div>
+
+    <script type="module">
+      const result = document.getElementById("result");
+
+      const diceSelect = document.getElementById("dice");
+      console.log(diceSelect.value);
+
+      import { rollDice } from "./dice/dice.js";
+
+      // 📌 replace the placeholder text with the actual dice roll result
+      result.textContent = "Dice result";
+
+      // 📌 wire the roll button to generate a random dice roll
+      // when the button is clicked generate random dice roll.
+      // use the rollDice function from dice.js
+    </script>
+  </body>
+</html>
