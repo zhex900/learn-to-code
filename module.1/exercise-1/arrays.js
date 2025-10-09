@@ -64,7 +64,7 @@ function exercise10(
     ["X", "O", "X"],
     ["O", "X", "O"],
     ["O", "X", "X"],
-  ]
+  ],
 ) {
   return board[1][1]; // center element
 }

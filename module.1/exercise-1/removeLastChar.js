@@ -15,7 +15,7 @@ console.log(newStr); // "Hello"
 //implement removeLastChar
 export function removeLastChar(str) {
   let newStr = "";
-// !==
+  // !==
   if (typeof str !== "string") {
     return str;
   }
