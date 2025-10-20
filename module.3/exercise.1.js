@@ -1,17 +1,38 @@
 // sum of array
-function sum(arr) {
-  let result = 0;
+//
+
+// function sum(arr) {
+//   return `🤚${asum(arr)}🚀`;
+// }
+
+const iteratorFunction = (arr, filterFunction) => {
+  let result = [];
+
   for (const item of arr) {
-    console.log(typeof item);
-    if (typeof item === "number") {
-      result += item;
-    }
-    if (typeof item === "string") {
-      const stringNumber = +item;
-      console.log(typeof stringNumber, stringNumber);
+    if (filterFunction(item)) {
+      result.push(item);
     }
   }
+
   return result;
+};
+
+function minFilter(item) {
+  return item < 3;
 }
 
-console.log(sum([1, 2, "1d"]));
+function maxFilter(item) {
+  return item > 3;
+}
+console.log(
+  iteratorFunction(
+    // arg 1
+    [1, 2, 3, 4, 5, 6],
+    // arg 2
+    (a) => typeof a === "number"
+  )
+);
+
+// given 4, [1,2,3]
+// given 5, [1,2,3,4]
+// given 0 []

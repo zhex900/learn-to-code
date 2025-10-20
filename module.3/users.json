@@ -1,0 +1,132 @@
+[
+  {
+    "id": "4ea889d0d028bdb0",
+    "profile": {
+      "firstName": "Margarete",
+      "lastName": "Spectacled bear",
+      "age": 2,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "8badbda374804f00",
+    "profile": {
+      "firstName": "Shemar",
+      "lastName": "Sloth bear",
+      "age": 8,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "8d00d7573d8c826e",
+    "profile": {
+      "firstName": "Barrett",
+      "lastName": "Asian black bear",
+      "age": 0,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "865172500923a8ae",
+    "profile": {
+      "firstName": "Nikolas",
+      "lastName": "American black bear",
+      "age": 4,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "88ba3d8ecc5553e6",
+    "profile": {
+      "firstName": "Jodie",
+      "lastName": "Spectacled bear",
+      "age": 5,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "052f54fc6ea46571",
+    "profile": {
+      "firstName": "Julia",
+      "lastName": "Brown bear",
+      "age": 8,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "454e3be58e657303",
+    "profile": {
+      "firstName": "Nelle",
+      "lastName": "Spectacled bear",
+      "age": 1,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "e830ad042327e399",
+    "profile": {
+      "firstName": "Mike",
+      "lastName": "American black bear",
+      "age": 7,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "86f4f92ea3769a77",
+    "profile": {
+      "firstName": "Lisa",
+      "lastName": "Sloth bear",
+      "age": 1,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  },
+  {
+    "id": "ebcfd3998bba046b",
+    "profile": {
+      "firstName": "Lempi",
+      "lastName": "Giant panda",
+      "age": 6,
+      "contact": {
+        "email": "",
+        "phone": ""
+      },
+      "role": "admin"
+    }
+  }
+]
