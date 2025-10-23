@@ -15,7 +15,9 @@ class UserSessionManager {
    * - Input: user = { name: "Jake", role: "admin" }, data = { token: "abc123" }
    * - Output: none (adds to internal Map)
    */
-  addSession(user, data) {}
+  addSession(user, data) {
+    this.sessions.set(user, { ...data, timestamp: new Date() });
+  }
 
   /**
    * 🔍 getSession(user)
@@ -39,7 +41,12 @@ class UserSessionManager {
    * - Input: user = { name: "Jake" }, newData = { token: "new456" }
    * - Output: none (updates Map)
    */
-  updateSession(user, newData) {}
+  updateSession(user, newData) {
+    if (!this.sessions.has(user)) {
+      return;
+    }
+    this.sessions.set(user, { ...this.sessions.get(user), ...newData });
+  }
 
   /**
    * 🗑️ removeSession(user)
@@ -63,7 +70,11 @@ class UserSessionManager {
    * - Input: none
    * - Output: console display or array of all sessions
    */
-  showAllSessions() {}
+  showAllSessions() {
+    for (const [user, session] of this.sessions) {
+      console.log("user->", user, "session->", session);
+    }
+  }
 
   /**
    * 🧹 cleanupInactive(maxMinutes)
@@ -71,7 +82,15 @@ class UserSessionManager {
    * - Input: maxMinutes = 30
    * - Output: none (removes old sessions)
    */
-  cleanupInactive(maxMinutes) {}
+  cleanupInactive(maxMinutes) {
+    for (const [user, { timestamp }] of this.sessions) {
+      console.log(user, timestamp);
+      const ageInMinutes = (+new Date() - +new Date(timestamp)) / 1000 / 60;
+      if (ageInMinutes > maxMinutes) {
+        this.sessions.delete(user);
+      }
+    }
+  }
 
   /**
    * 🔁 forEachSession(callback)
@@ -81,7 +100,11 @@ class UserSessionManager {
    * Example:
    *   manager.forEachSession((user, session) => console.log(user.name, session))
    */
-  forEachSession(callback) {}
+  forEachSession(callback) {
+    for (const session of this.sessions) {
+      callback(session);
+    }
+  }
 
   /**
    * 🧾 toObject()
@@ -89,7 +112,9 @@ class UserSessionManager {
    * - Input: none
    * - Output: { "Jake": { token: "abc123", lastActive: "..." }, ... }
    */
-  toObject() {}
+  toObject() {
+    return Object.fromEntries(this.sessions);
+  }
 
   /**
    * 📜 toJSON(pretty)
@@ -100,7 +125,13 @@ class UserSessionManager {
    *   manager.toJSON(true)
    *   => "{\n  'Jake': { 'token': 'abc123', ... }\n}"
    */
-  toJSON(pretty = false) {}
+  toJSON(pretty = false) {
+    const obj = this.toObject();
+    const objStr = JSON.stringify(obj, null, 2);
+    const o = JSON.parse(objStr);
+    console.log();
+    return objStr;
+  }
 
   /**
    * 🔁 fromObject(obj)
@@ -118,3 +149,33 @@ class UserSessionManager {
    */
   clear() {}
 }
+
+const sessionManager = new UserSessionManager();
+
+sessionManager.addSession("jake", {
+  role: "admin",
+  login: "time",
+  theme: "dark",
+});
+sessionManager.addSession("John", {
+  role: "admin",
+  login: "time",
+  theme: "dark",
+});
+
+// sessionManager.updateSession("jake", {
+//   theme: "light",
+//   source: "internet",
+// });
+// sessionManager.showAllSessions();
+// sessionManager.cleanupInactive(10);
+
+// console.log(sessionManager.toJSON());
+/*
+  {
+    role: "admin",
+    login: "time",
+    theme: "light",
+    source: "internet",
+  }
+*/
