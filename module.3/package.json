@@ -4,6 +4,7 @@
   "main": "exercise.1.js",
   "type": "module",
   "scripts": {
+    "start": "serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,5 +12,8 @@
   "description": "",
   "devDependencies": {
     "@faker-js/faker": "^10.1.0"
+  },
+  "dependencies": {
+    "serve": "^14.2.5"
   }
 }
