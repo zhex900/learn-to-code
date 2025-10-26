@@ -16,7 +16,8 @@ export function debounce(fn, delay = 300) {
 
     // Schedule a new one
     timerId = setTimeout(() => {
-      fn.apply(context, args); // forward context + args
+      // fn.apply(context, args); // forward context + args
+      fn(...args);
     }, delay);
   };
 }
@@ -26,10 +27,3 @@ function handleSearchInput(query) {
 }
 
 const debounceSearchInput = debounce(handleSearchInput, 500);
-
-// debounceSearchInput("a");
-// debounceSearchInput("ap");
-// debounceSearchInput("app");
-// debounceSearchInput("appppppppppp");
-// debounceSearchInput("appl");
-// debounceSearchInput("apple"); // The API call will run only for 'apple'

@@ -18,10 +18,23 @@ function createProgressBar(totalSteps, barLength = 30) {
   // --- Initial setup messages ---
   console.log(`Initialized progress bar with ${totalSteps} steps.`);
   setInterval(() => {
-    // console.log("1");
     currentStep++;
     render(); // Draw the initial 0% bar
   }, 1000);
 }
 
+const tasks = [
+  () =>
+    setTimeout(() => {
+      currentStep++;
+    }, 1000),
+  () =>
+    setTimeout(() => {
+      currentStep++;
+    }, 200),
+  () =>
+    setTimeout(() => {
+      currentStep++;
+    }, 400),
+];
 createProgressBar(20, 40);

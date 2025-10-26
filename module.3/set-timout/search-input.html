@@ -118,7 +118,9 @@
 
         // 2. SCHEDULING: Schedule the new search to run after the delay.
         // 3. Store the new ID.
+        console.log("key", currentQuery);
         searchTimerId = setTimeout(() => {
+          console.log("call api", currentQuery);
           simulateAPICall(currentQuery);
         }, DELAY);
       }

@@ -47,12 +47,12 @@ function stopTicker(intervalId) {
 }
 
 // --- Test Case ---
-// const myInterval = startTicker();
+const myInterval = startTicker();
 
 // Stop the ticker after 5.5 seconds (it should have ticked 5 times)
-// setTimeout(() => {
-//   stopTicker(myInterval);
-// }, 5500);
+setTimeout(() => {
+  stopTicker(myInterval);
+}, 5500);
 /**
  * Simulates a text-based progress bar, updating the output on the same line.
  * This implementation relies on the 'process.stdout.write' method and the
@@ -96,4 +96,27 @@ function startTextProgressBar(durationMs, barWidth = 30) {
 // --- Test Case: 4-second progress bar ---
 // To run this, save it as a .js file (e.g., loader.js) and run it with Node:
 // node loader.js
-startTextProgressBar(4000);
+// startTextProgressBar(4000);
+
+// load large image
+// function loadImage(url, done) {
+//   // simulate load image
+//   return setTimeout(() => {
+//     console.log("image loaded");
+//     done();
+//   }, 1000);
+// }
+
+// let timeoutId;
+
+// const cancelId = loadImage("picture", () => clearTimeout(timeoutId));
+
+// const timeoutId = setTimeout(() => {
+//   clearTimeout(cancelId);
+//   // call api
+//   console.log("too bad load image timeout");
+// }, 200);
+
+// if image is loaded
+
+// console.log("cleared");

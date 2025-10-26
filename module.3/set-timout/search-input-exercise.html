@@ -62,6 +62,23 @@
     <script>
       // --- Debounce Logic ---
 
+      function debounce(fn, delay = 500) {
+        let timerId; // stores the timeout ID
+
+        return function (...args) {
+          const context = this; // preserve "this" context
+
+          // Clear the previous timer if function is called again
+          clearTimeout(timerId);
+
+          // Schedule a new one
+          timerId = setTimeout(() => {
+            fn.apply(context, args); // forward context + args
+            //fn(...args);
+          }, delay);
+        };
+      }
+
       const DELAY = 500; // 500 milliseconds (0.5 second)
       // Global state variable to hold the timer ID (maintained by the closure)
       let searchTimerId = null;
@@ -73,7 +90,11 @@
       /**
        * The simulated resource-intensive function (runs only after debounce delay).
        */
+      let apiCounter = 0;
       function simulateAPICall(query) {
+        apiCounter++;
+        console.log("call API", query, apiCounter);
+
         resultsElement.innerHTML = `
                 <div class="text-green-700 font-semibold">
                     <span class="text-2xl">&#9989;</span> API CALL EXECUTED!
@@ -95,8 +116,25 @@
        * The core handler function (simulating the keyup/input event).
        * This function implements the debouncing logic.
        */
+      let keyCount = 0;
+
+      const debouncedApiCall = debounce(simulateAPICall);
+
       function handleInput(query) {
-        simulateAPICall(query);
+        keyCount++;
+        console.log("key", query, keyCount);
+        if (query === "") {
+          keyCount = 0;
+          apiCounter = 0;
+        }
+
+        //simulateAPICall(query);
+        debouncedApiCall(query);
+
+        // first key start timer
+        // if timer finish call api
+        // if another key is press cancel timer and reset timer
+        // when input is empty cancel the timer don't start new timer
       }
     </script>
   </body>

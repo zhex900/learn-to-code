@@ -31,7 +31,7 @@ function startCountdown(seconds) {
 // --- Test Case Execution ---
 
 // Start a 5-second countdown
-const timerId = startCountdown(5);
+const timerId = startCountdown(2);
 
 // Optional: External cancellation demonstration (won't happen here, but possible)
 // setTimeout(() => {
