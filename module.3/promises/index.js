@@ -54,7 +54,7 @@ const main = async () => {
   const url = `${BASE_URL}/products?id=6`;
   const response = await axios.get(url);
   //   console.log(response);
-  //   loopThroughAllPages();
+  loopThroughAllPages();
 };
 
 main().then(() => {

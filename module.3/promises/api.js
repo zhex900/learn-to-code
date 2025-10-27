@@ -23,7 +23,7 @@ const api = {
    */
   async getProducts(page = 1, limit = 10, category = "") {
     try {
-      let url = `${BASE_URL}/products?_page=${page}&_per_page=${limit}`;
+      let url = `${BASE_URL}/products?_page=${page}&_limit=${limit}`;
 
       if (category) {
         url += `&category=${category}`;
@@ -39,7 +39,7 @@ const api = {
       );
 
       return {
-        products: response.data.data,
+        products: response.data,
         totalItems: totalCount,
         totalPages: Math.ceil(totalCount / limit),
       };
