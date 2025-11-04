@@ -4,7 +4,7 @@ let tasks = []; // In-memory representation of the server's database
 
 // A mock ID for creation (simulating server assignment)
 let nextId = 1;
-
+  
 // --- DOM Elements ---
 const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
@@ -51,12 +51,45 @@ function fetchAndRenderTasks() {}
  * CREATE: Adds a new task to the array (Mock POST /todos).
  */
 function addTask() {
+  addTaskBtn.className = addTaskBtn.className.replace(
+    "btn-primary",
+    "btn-success"
+  );
+  setTimeout(() => {
+    addTaskBtn.className = addTaskBtn.className.replace(
+      "btn-success",
+      "btn-primary"
+    );
+  }, 700);
+
   const taskText = taskInput.value.trim();
 
   if (taskText === "") {
     showMessage("Task cannot be empty.", "danger");
     return;
   }
+  taskInput.value = "";
+  const taskElement = document.createElement("li");
+  // add class card p-2 mb-2
+  taskElement.className = "card p-2 mb-2 d-flex justify-content-between";
+  //    <li class="d-flex justify-content-between">
+  //   <div>112121</div>
+  //   <div>1/2/2</div>
+  //   <button class="btn btn-danger">delete</button>
+  // </li>
+  const taskTextElement = document.createElement("div");
+  taskTextElement.textContent = taskText;
+  const taskDateElement = document.createElement("div");
+  taskDateElement.textContent = new Date();
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.className = "btn btn-danger";
+  deleteButton.addEventListener("click", () => {
+    taskElement.remove();
+  });
+
+  taskElement.append(...[taskTextElement, taskDateElement, deleteButton]);
+  taskList.prepend(taskElement);
 }
 
 /**
@@ -72,7 +105,7 @@ function deleteTask(id, taskName) {}
 // --- Event Listeners (DOM API) ---
 
 // Attach the main event listener to the 'Add Task' button
-// addTaskBtn.addEventListener("click", addTask);
+addTaskBtn.addEventListener("click", addTask);
 
 // Initial data load
 fetchAndRenderTasks();
