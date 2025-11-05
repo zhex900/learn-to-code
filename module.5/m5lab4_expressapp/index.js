@@ -1,5 +1,5 @@
 import express, { json } from "express"; // import the express package
-import friendRoutes from "./routes/friendRoutes";
+import friendRoutes from "./routes/friendRoutes.js";
 
 const app = express(); // create a new app
 const port = 3000; // change this to run the app on a different port - usually a 4 digit number
