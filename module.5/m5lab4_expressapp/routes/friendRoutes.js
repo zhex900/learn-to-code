@@ -1,6 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const friends = require('../models/friends')
+import { Router } from "express";
+const router = Router();
+import friends, { length, push } from '../models/friends';
 
 
 // TODO - #1: Add support to the 'filter' endpoint for a new query parameter 'letter' which filters friends by starting letter
@@ -69,11 +69,11 @@ router.post('/', (req, res) => {
         return;
     }
     else if (!newFriend.id) {
-        newFriend.id = friends.length + 1; // generate an ID if one is not present
+        newFriend.id = length + 1; // generate an ID if one is not present
     }
 
     // if the new friend is valid, add them to the list and return the successfully added object
-    friends.push(newFriend)
+    push(newFriend)
     res.status(200).json(newFriend)
 })
 
@@ -88,4 +88,4 @@ router.put('/:id', (req, res) => {
     res.json({result: 'Updated friend with ID ' + friendId, data: updatedFriend})
 })
 
-module.exports = router;
+export default router;
