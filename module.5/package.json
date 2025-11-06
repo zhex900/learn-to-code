@@ -17,6 +17,24 @@
     "nodemon": "^3.1.10",
     "serve": "^14.2.5",
     "supertest": "^6.3.4",
+    "swagger-ui-express": "^5.0.1",
     "vitest": "^1.6.0"
-  }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Calculator",
+      "description": "API for Calculus in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
 }
