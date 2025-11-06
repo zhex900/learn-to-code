@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.7.2/build/global/luxon.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #e3f2fd;
+      }
+      .card {
+        padding: 10px;
+      }
+      .card-title {
+        font-weight: 600;
+        font-size: 3em;
+        padding: 0 0 10px 0;
+      }
+      .card-description {
+        font-weight: 400;
+        font-size: 2em;
+      }
+      .card-image {
+        height: 300px;
+      }
+      .col {
+        width: auto;
+        border: 1 1;
+      }
+    </style>
+  </head>
+  <body>
+    <template id="card-template">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+    </template>
+    <canvas id="myBarChart"></canvas>
+    <form id="myForm" action="#" method="POST">
+      <input type="text" id="newsTitle" name="newsTitle" required />
+      <input type="text" id="newsContent" name="newsContent" required />
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="card-list"></div>
+  </body>
+  <script>
+    let news = [
+      {
+        id: 1,
+        title: "Election Results",
+        content: "Newly elected minister...",
+      },
+      { id: 2, title: "Sporting Success", content: "World Cup winners..." },
+      {
+        id: 3,
+        title: "Tornado Warning",
+        content: "Residents should prepare...",
+      },
+    ];
+    const form = document.getElementById("myForm");
+
+    // 2. Attach an event listener for the 'submit' event
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      console.log(event);
+      console.log("title", event.target.elements.newsTitle.value);
+      console.log("content", event.target.elements.newsContent.value);
+      news.push({
+        id: news.length + 1,
+        title: event.target.elements.newsTitle.value,
+        content: event.target.elements.newsContent.value,
+      });
+    });
+
+    const cardListElement = document.getElementById("card-list");
+    function addCard(title, text, imageUrl) {
+      // clone the template
+      const template = document
+        .getElementById("card-template")
+        .content.cloneNode(true);
+
+      // populate the template
+      template.querySelector(".card-title").innerText = title;
+      template.querySelector(".card-text").innerText = text;
+
+      // include the populated template into the page
+      document.querySelector("#card-list").appendChild(template);
+    }
+
+    // every 5 seconds reload card froms news array
+    // clear
+    let i = 0;
+
+    const handler = () => {
+      cardListElement.innerHTML = "";
+      news.forEach((n) => addCard(n.title + i, n.content));
+      console.log("---", i);
+      i++;
+    };
+    setInterval(handler, 5000);
+    console.log(
+      luxon.DateTime.fromISO("2017-05-15")
+        .plus({ months: 2, days: 6 })
+        .toISODate()
+    );
+
+    // Wait for the DOM content to be fully loaded
+    document.addEventListener("DOMContentLoaded", () => {
+      // Get a reference to the canvas element using its ID
+
+      const data = [
+        { year: 2010, count: 10 },
+        { year: 2011, count: 20 },
+        { year: 2012, count: 15 },
+        { year: 2013, count: 25 },
+        { year: 2014, count: 22 },
+        { year: 2015, count: 30 },
+        { year: 2016, count: 28 },
+      ];
+
+      new Chart(document.getElementById("myBarChart"), {
+        type: "bar",
+        data: {
+          labels: data.map((row) => row.year),
+          datasets: [
+            {
+              label: "Acquisitions by year",
+              data: data.map((row) => row.count),
+            },
+          ],
+        },
+      });
+    });
+  </script>
+</html>

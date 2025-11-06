@@ -1,7 +1,7 @@
 import { Router } from "express";
-const router = Router();
 import friends from "../models/friends.js";
 
+const router = Router();
 // TODO - #1: Add support to the 'filter' endpoint for a new query parameter 'letter' which filters friends by starting letter
 
 // TODO - #2: Modify the 'info' route to only return the user-agent, content-type and accept header data
@@ -22,7 +22,16 @@ router.get("/", (req, res) => {
 router.get("/filter", (req, res) => {
   console.log(req.query);
   let filterGender = req.query.gender;
+  // letter
+  let filterLetter = req.query.letter;
+
   let matchingFriends = [...friends];
+
+  if (filterLetter) {
+    matchingFriends = matchingFriends.filter(
+      (friend) => friend.name[0].toLowerCase() === filterLetter.toLowerCase()
+    );
+  }
 
   if (filterGender) {
     matchingFriends = matchingFriends.filter(

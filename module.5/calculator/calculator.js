@@ -63,10 +63,21 @@ export class Calculator {
     if (this.operator === null || this.previous === null) return;
     const a = this.previous;
     const b = parseFloat(this.current);
-    let result;
+    let result = "Thinking...";
     switch (this.operator) {
       case "+":
-        result = a + b;
+        fetch(`http://localhost:4000/add?a=${a}&b=${b}`, {
+          headers: {
+            a,
+            b,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("result 2", data.result);
+            document.getElementById("display").value = data.result;
+          });
+
         break;
       case "-":
         result = a - b;

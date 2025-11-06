@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Safe Math Calculator (No Eval)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+      <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+        🔒 Safe Math Evaluator
+      </h1>
+
+      <input
+        type="text"
+        id="equationInput"
+        placeholder="e.g., 5 * (2 + 3) / 2"
+        class="w-full p-3 mb-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+      />
+
+      <button
+        id="calculateBtn"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg text-lg transition duration-150 ease-in-out transform hover:scale-[1.01] shadow-md hover:shadow-lg"
+      >
+        Calculate Safely
+      </button>
+
+      <div
+        class="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg text-center"
+      >
+        <h2 class="text-xl font-medium text-gray-700">Result:</h2>
+        <p
+          id="resultDisplay"
+          class="text-3xl font-extrabold text-green-600 mt-2"
+        >
+          0
+        </p>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const inputElement = document.getElementById("equationInput");
+        const buttonElement = document.getElementById("calculateBtn");
+        const resultElement = document.getElementById("resultDisplay");
+
+        // Regex to validate the input: allows digits, basic math operators (+, -, *, /),
+        // parentheses, and spaces. This is the core of the security enhancement.
+        const safeExpressionRegex = /^[\d\s\+\-\*\/\(\)\.]+$/;
+
+        // Function to safely evaluate the math expression without eval()
+        function evaluateExpression() {
+          const equation = inputElement.value.trim();
+
+          // 1. Input Validation
+          if (!equation) {
+            displayError("Please enter an equation.");
+            return;
+          }
+
+          // 2. Security Check (crucial step for the 'no eval' approach)
+          if (!safeExpressionRegex.test(equation)) {
+            displayError(
+              "Error: Invalid characters detected. Only numbers and basic operators (+, -, *, /, ()) are allowed."
+            );
+            return;
+          }
+
+          // 3. Safe Calculation using the Function constructor
+          try {
+            // This creates a new function that returns the result of the expression.
+            // It's safer than eval() because it runs in a sandbox-like scope,
+            // making it harder (though not impossible) to access global variables or the DOM.
+            const func = new Function("return " + equation);
+            const result = func();
+
+            if (result === undefined || result === null || isNaN(result)) {
+              throw new Error("Invalid calculation result");
+            }
+
+            // Display the result
+            resultElement.textContent = result;
+            resultElement.classList.remove("text-red-500");
+            resultElement.classList.add("text-green-600");
+          } catch (error) {
+            // Handle syntax errors (e.g., mismatched parentheses, division by zero)
+            displayError("Error: Invalid Equation or Calculation Failed.");
+            console.error("Calculation Error:", error);
+          }
+        }
+
+        // Helper function to display error state
+        function displayError(message) {
+          resultElement.textContent = message;
+          resultElement.classList.remove("text-green-600");
+          resultElement.classList.add("text-red-500");
+        }
+
+        // Attach event listeners
+        buttonElement.addEventListener("click", evaluateExpression);
+
+        // Allow calculation on 'Enter' key press
+        inputElement.addEventListener("keypress", (event) => {
+          if (event.key === "Enter") {
+            evaluateExpression();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
