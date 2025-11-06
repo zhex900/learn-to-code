@@ -14,6 +14,7 @@ const router = Router();
 
 // default endpoint, gets all friends
 router.get("/", (req, res) => {
+  // Default: return all friends
   res.json(friends);
 });
 
@@ -22,6 +23,8 @@ router.get("/", (req, res) => {
 router.get("/filter", (req, res) => {
   console.log(req.query);
   let filterGender = req.query.gender;
+  const ageFilter = req.query.age;
+  console.log({ ageFilter });
   // letter
   let filterLetter = req.query.letter;
 
@@ -104,3 +107,26 @@ router.put("/:id", (req, res) => {
 });
 
 export default router;
+
+// pagination endpoint, gets friends matching th
+// const { page, limit } = req.query;
+
+// If pagination is requested, validate and slice
+// if (page !== undefined || limit !== undefined) {
+//   const pageNum = parseInt(page || "1", 10);
+//   const limitNum = parseInt(limit || "10", 10);
+
+//   if (
+//     Number.isNaN(pageNum) ||
+//     Number.isNaN(limitNum) ||
+//     pageNum < 1 ||
+//     limitNum < 1
+//   ) {
+//     return res.status(400).json({ error: "Invalid page or limit" });
+//   }
+
+//   const startIndex = (pageNum - 1) * limitNum;
+//   const endIndex = startIndex + limitNum;
+//   const paged = friends.slice(startIndex, endIndex);
+//   return res.json(paged);
+// }

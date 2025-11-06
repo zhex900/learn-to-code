@@ -10,7 +10,12 @@ app.use(json());
 app.use("/", express.static("public"));
 app.use("/friends", friendRoutes);
 
-// starts the backend app on the given port
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+// Only start the server when not running tests
+if (process.env.NODE_ENV !== "test") {
+  // starts the backend app on the given port
+  app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+  });
+}
+
+export default app;
