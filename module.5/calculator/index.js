@@ -1,7 +1,7 @@
 // create express app to basic math functions
 import express from "express";
 import cors from "cors";
-import { add } from "./controller.js";
+import { add, minus } from "./controller.js";
 
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" assert { type: "json" };
@@ -13,6 +13,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors());
 
 app.get("/add", add);
+
+app.get("/minus", minus);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
