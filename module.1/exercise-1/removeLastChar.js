@@ -14,5 +14,19 @@ console.log(newStr); // "Hello"
 
 //implement removeLastChar
 export function removeLastChar(str) {
-  return str;
+  let newStr = "";
+  // !==
+  if (typeof str !== "string") {
+    return str;
+  }
+  for (let i = 0; i < str.length - 1; i++) {
+    newStr += str[i];
+  }
+  return newStr;
 }
+
+console.log("-", removeLastChar("abcd")); // "abc"
+// abc -> ab
+// abcd -> abc
+// null -> null
+// "" -> ""

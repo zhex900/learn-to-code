@@ -1,16 +1,26 @@
 // 1. Create and Access Arrays
 function exercise1() {
-  const fruits = ["apple", "banana", "cherry", "mango", "orange"];
+  let firstName = "John";
+  firstName = "Doeadfasdfafasfdasf"; // reassigning variable
+
+  console.log("firstName:", firstName[1]);
+  const fruits = ["apple", "banana", "cherry", "mango", 1, {}, true, "orange"];
+
+  const lastFurit = fruits[fruits.length - 3];
+  console.log("lastFurit:", lastFurit);
   console.log("does it have mango?", fruits.includes("mango"));
   console.log("does it have pineapple?", fruits.includes("pineapple"));
   console.log("where is mango?", fruits.indexOf("mango"));
   console.log("last fruit?", fruits[fruits.length - 1]);
   console.log("first fruit?", fruits[0]);
+
   return {
     first: fruits[0],
     last: fruits[fruits.length - 1],
   };
 }
+
+console.log(exercise1());
 
 // 2. Add / Remove Elements
 function exercise2(fruits = ["apple", "banana", "cherry"]) {
@@ -39,14 +49,15 @@ function exercise6(fruits = ["banana", "mango", "apple", "cherry"]) {
 function exercise7(fruits = ["apple", "banana", "cherry"]) {
   const transformedFruits = [];
   for (let i = 0; i < fruits.length; i++) {
-    console.log(fruits[i]);
+    // console.log(fruits[i]);
+    transformedFruits.push(fruits[i].toUpperCase() + "🚀");
   }
-  for (const fruit of fruits) {
-    transformedFruits.push(fruit.toUpperCase());
-  }
+  // for (const fruit of fruits) {
+  //   transformedFruits.push(fruit.toUpperCase());
+  // }
   return transformedFruits;
 }
-
+console.log(exercise7());
 // 6. Nested Arrays
 function exercise10(
   board = [
@@ -72,7 +83,20 @@ export const addToEnd = (arr, element) => {
 
 // tasks
 
-// 1. give two arrays return the union of the two arrays
-export const union = (arr1, arr2) => {
-  //   return [...new Set([...arr1, ...arr2])];
-};
+// // 1. give two arrays return the union of the two arrays
+// export const union = (arr1, arr2) => {
+//   const result = [...arr1];
+
+//   for (const item of arr2) {
+//     if (!result.includes(item)) {
+//       result.push(item);
+//     }
+//   }
+//   return result;
+//   // const result = [];
+//   //   return [...new Set([...arr1, ...arr2])];
+// };
+
+// const bob = [1, 2];
+// const aa = [2, 3,2,3,];
+// console.log(union(bob, aa));
